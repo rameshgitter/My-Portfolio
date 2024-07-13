@@ -191,63 +191,57 @@ footer {
     body {
         font-size: 14px;
     }
-
     .container {
         padding: 0 15px;
     }
-
     header {
         padding: 1rem 15px;
     }
-
     nav {
         padding: 0.5rem 15px;
         overflow-x: auto;
         white-space: nowrap;
         -webkit-overflow-scrolling: touch;
     }
-
     nav ul {
         flex-wrap: nowrap;
+        justify-content: flex-start;
+        padding-left: 0;
     }
-
     nav ul li {
         flex: 0 0 auto;
         margin: 0 0.5rem;
     }
-
+    nav ul li:first-child {
+        margin-left: 0;
+    }
     nav ul li a {
         font-size: 0.9rem;
     }
-
     section {
-        padding: 2rem 0;
+        padding: 2rem 15px;
     }
-
     .section-title {
         font-size: 1.5rem;
         margin-bottom: 1.5rem;
     }
-
     .card {
         padding: 1rem;
         margin-bottom: 1rem;
+        margin-left: 0;
+        margin-right: 0;
     }
-
     h2 {
         font-size: 1.8rem;
     }
-
     h3 {
         font-size: 1.3rem;
     }
-
     .achievement-item {
         margin-bottom: 1rem;
     }
-
     footer {
-        padding: 0.8rem 0;
+        padding: 0.8rem 15px;
         font-size: 0.8rem;
     }
 }
@@ -263,19 +257,15 @@ img, video, iframe {
     body {
         font-size: 13px;
     }
-
     .section-title {
         font-size: 1.3rem;
     }
-
     .card {
         padding: 0.8rem;
     }
-
     h2 {
         font-size: 1.6rem;
     }
-
     h3 {
         font-size: 1.2rem;
     }
