@@ -197,10 +197,11 @@ footer {
     }
 
     header {
-        padding: 0.5rem 0;
+        padding: 1rem 15px;
     }
 
     nav {
+        padding: 0.5rem 15px;
         overflow-x: auto;
         white-space: nowrap;
         -webkit-overflow-scrolling: touch;
