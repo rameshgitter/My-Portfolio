@@ -5,21 +5,908 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Portfolio of Ramesh Chandra Soren, Web Developer specializing in full stack development">
     <title>Ramesh Chandra Soren - Web Developer Portfolio</title>
-    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #1e40af;
+            --accent-color: #3b82f6;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --text-primary: #1f2937;
+            --text-secondary: #6b7280;
+            --text-light: #9ca3af;
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8fafc;
+            --bg-card: #ffffff;
+            --border-color: #e5e7eb;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+            --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background-color: var(--bg-primary);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            padding: 4rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" fill="white" opacity="0.1"><polygon points="0,0 1000,0 1000,100 0,80"/></svg>') no-repeat bottom;
+            background-size: cover;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .header-content h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #ffffff, #e0e7ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header-content p {
+            font-size: 1.25rem;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .contact-item:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .contact-item i {
+            font-size: 1.25rem;
+            opacity: 0.8;
+        }
+
+        .contact-item a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .resume-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: white;
+            color: var(--primary-color);
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-lg);
+            margin-top: 2rem;
+        }
+
+        .resume-button:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        /* Navigation */
+        nav {
+            background: var(--bg-card);
+            box-shadow: var(--shadow-sm);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav .container {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            padding: 1rem;
+        }
+
+        nav a {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        nav a:hover {
+            background: var(--bg-secondary);
+            color: var(--primary-color);
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: var(--primary-color);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        nav a:hover::after {
+            width: 80%;
+        }
+
+        /* Main Content */
+        main {
+            padding: 4rem 0;
+        }
+
+        section {
+            margin-bottom: 5rem;
+            scroll-margin-top: 100px;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 3rem;
+            text-align: center;
+            position: relative;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+            border-radius: 2px;
+        }
+
+        /* About Section */
+        .about-section {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .about-section p {
+            font-size: 1.125rem;
+            line-height: 1.8;
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+        }
+
+        /* Experience Section */
+        .experience-timeline {
+            position: relative;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .experience-timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--primary-color), var(--accent-color));
+            transform: translateX(-50%);
+        }
+
+        .experience-item {
+            position: relative;
+            margin-bottom: 3rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .experience-item:nth-child(odd) {
+            flex-direction: row;
+        }
+
+        .experience-item:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .experience-content {
+            background: var(--bg-card);
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--border-color);
+            width: calc(50% - 2rem);
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .experience-content:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .experience-item:nth-child(odd) .experience-content {
+            margin-right: 2rem;
+        }
+
+        .experience-item:nth-child(even) .experience-content {
+            margin-left: 2rem;
+        }
+
+        .experience-content::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 0;
+            height: 0;
+            border: 10px solid transparent;
+            transform: translateY(-50%);
+        }
+
+        .experience-item:nth-child(odd) .experience-content::before {
+            right: -20px;
+            border-left-color: var(--bg-card);
+        }
+
+        .experience-item:nth-child(even) .experience-content::before {
+            left: -20px;
+            border-right-color: var(--bg-card);
+        }
+
+        .experience-dot {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            width: 16px;
+            height: 16px;
+            background: var(--primary-color);
+            border: 4px solid white;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow: var(--shadow-md);
+        }
+
+        .experience-header {
+            margin-bottom: 1rem;
+        }
+
+        .experience-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .experience-company {
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: var(--text-primary);
+            margin-bottom: 0.25rem;
+        }
+
+        .experience-duration {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            margin-bottom: 0.25rem;
+        }
+
+        .experience-location {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            margin-bottom: 1rem;
+        }
+
+        .experience-description {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .experience-skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .skill-tag {
+            background: var(--bg-secondary);
+            color: var(--primary-color);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            border: 1px solid var(--border-color);
+        }
+
+        /* Skills Section */
+        .skills {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .skill {
+            background: var(--bg-card);
+            padding: 1.5rem 1rem;
+            border-radius: 12px;
+            text-align: center;
+            font-weight: 600;
+            color: var(--text-primary);
+            box-shadow: var(--shadow-md);
+            transition: all 0.3s ease;
+            border: 1px solid var(--border-color);
+        }
+
+        .skill:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary-color);
+        }
+
+        /* Education Section */
+        .education-item {
+            background: var(--bg-card);
+            padding: 2rem;
+            border-radius: 16px;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow-md);
+            border-left: 4px solid var(--primary-color);
+            transition: all 0.3s ease;
+        }
+
+        .education-item:hover {
+            transform: translateX(5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .education-item h3 {
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .education-item p {
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Projects Section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .project {
+            background: var(--bg-card);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            transition: all 0.3s ease;
+            border: 1px solid var(--border-color);
+        }
+
+        .project:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .project-header {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+            padding: 2rem;
+            position: relative;
+        }
+
+        .project-header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+        }
+
+        .project h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .project-content {
+            padding: 2rem;
+        }
+
+        .project p {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 2rem;
+        }
+
+        .button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--primary-color);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .button:hover {
+            background: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+
+        /* Achievements Section */
+        .achievements-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .achievement-item {
+            background: var(--bg-card);
+            padding: 2rem;
+            border-radius: 16px;
+            text-align: center;
+            box-shadow: var(--shadow-md);
+            transition: all 0.3s ease;
+            border: 1px solid var(--border-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .achievement-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+        }
+
+        .achievement-item:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .achievement-item h3 {
+            color: var(--primary-color);
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .highlight {
+            color: var(--primary-color);
+            font-weight: 700;
+            font-size: 1.25rem;
+        }
+
+        .hackathon-achievement {
+            background: linear-gradient(135deg, var(--success-color), #059669);
+            color: white;
+        }
+
+        .hackathon-achievement::before {
+            background: linear-gradient(90deg, #ffffff, #f0fdf4);
+        }
+
+        .hackathon-achievement h3 {
+            color: white;
+        }
+
+        .hackathon-achievement .highlight {
+            color: #f0fdf4;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            background: var(--bg-secondary);
+            padding: 5rem 0;
+            margin-top: 5rem;
+        }
+
+        .contact-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .contact-intro {
+            margin-bottom: 3rem;
+        }
+
+        .contact-intro h2 {
+            margin-bottom: 1rem;
+        }
+
+        .contact-intro p {
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        .contact-form {
+            background: var(--bg-card);
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: var(--shadow-lg);
+            text-align: left;
+        }
+
+        .form-group {
+            margin-bottom: 2rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .submit-button {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .submit-button:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .submit-button:active {
+            transform: translateY(0);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--text-primary);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        /* Project Categories */
+        .project-category {
+            margin-bottom: 4rem;
+        }
+
+        .category-title {
+            font-size: 1.75rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 2rem;
+            text-align: left;
+            position: relative;
+            padding-left: 3rem;
+        }
+
+        .category-title i {
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.5rem;
+        }
+
+        .category-title::after {
+            display: none;
+        }
+
+        /* Future Project Styling */
+        .future-project {
+            border: 2px dashed var(--primary-color);
+            opacity: 0.8;
+        }
+
+        .future-project .project-header {
+            background: linear-gradient(135deg, var(--text-light), var(--text-secondary));
+        }
+
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--warning-color);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        /* Project Links */
+        .project-links {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .button-secondary {
+            background: var(--success-color);
+        }
+
+        .button-secondary:hover {
+            background: #059669;
+        }
+
+        .button-small {
+            padding: 0.5rem 1rem;
+            font-size: 0.9rem;
+        }
+
+        /* Minor Projects Grid */
+        .minor-projects {
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        }
+
+        .project-minor {
+            border-left: 4px solid var(--accent-color);
+        }
+
+        .project-minor .project-header {
+            background: linear-gradient(135deg, var(--accent-color), var(--primary-color));
+            padding: 1.5rem;
+        }
+
+        /* Project Year Badge */
+        .project-year {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .project-header {
+            position: relative;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .contact-info {
+                grid-template-columns: 1fr;
+            }
+
+            nav .container {
+                flex-wrap: wrap;
+                gap: 1rem;
+            }
+
+            h2 {
+                font-size: 2rem;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .skills {
+                grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            }
+
+            .experience-timeline::before {
+                left: 2rem;
+            }
+
+            .experience-item {
+                flex-direction: column !important;
+                align-items: flex-start;
+            }
+
+            .experience-content {
+                width: calc(100% - 4rem);
+                margin-left: 4rem !important;
+                margin-right: 0 !important;
+            }
+
+            .experience-content::before {
+                left: -20px !important;
+                right: auto !important;
+                border-right-color: var(--bg-card) !important;
+                border-left-color: transparent !important;
+            }
+
+            .experience-dot {
+                left: 2rem;
+            }
+
+            .category-title {
+                font-size: 1.5rem;
+                padding-left: 2.5rem;
+            }
+
+            .category-title i {
+                font-size: 1.25rem;
+            }
+
+            .project-links {
+                flex-direction: column;
+            }
+
+            .minor-projects {
+                grid-template-columns: 1fr;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-form {
+                padding: 2rem;
+            }
+        }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Loading animation */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeInUp 0.6s ease-out;
+        }
+    </style>
 </head>
 <body>
     <header>
         <div class="container">
-            <div class="header-content">
+            <div class="header-content fade-in">
                 <h1>Ramesh Chandra Soren</h1>
-                <p>Web Developer | Fresher | Full Stack</p>
+                <p>Full Stack Web Developer | Competitive Programmer | ML Enthusiast</p>
             </div>
-            <div class="contact-info">
-                <p>Email: <a href="mailto:sorenramesh868@gmail.com">sorenramesh868@gmail.com</a></p>
-                <p>Phone: (+91) 8984090285</p>
-                <p>LinkedIn: <a href="https://www.linkedin.com/in/ramesh-chandra-soren" target="_blank">Ramesh Chandra Soren</a></p>
-                <p>Github: <a href="https://github.com/rameshgitter" target="_blank">github.com/rameshgitter</a></p>
-                <a href="https://drive.google.com/file/d/1RkXYo1D8CkODzeD8YHm0RX6zOoap_IWU/view?usp=sharing" target="_blank" class="resume-button">View Resume</a>
+            <div class="contact-info fade-in">
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <a href="mailto:sorenramesh868@gmail.com">sorenramesh868@gmail.com</a>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-phone"></i>
+                    <span>(+91) 8984090285</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fab fa-linkedin"></i>
+                    <a href="https://www.linkedin.com/in/ramesh-chandra-soren" target="_blank">LinkedIn Profile</a>
+                </div>
+                <div class="contact-item">
+                    <i class="fab fa-github"></i>
+                    <a href="https://github.com/rameshgitter" target="_blank">GitHub Profile</a>
+                </div>
+            </div>
+            <div style="text-align: center;">
+                <a href="https://drive.google.com/file/d/1RkXYo1D8CkODzeD8YHm0RX6zOoap_IWU/view?usp=sharing" target="_blank" class="resume-button">
+                    <i class="fas fa-download"></i>
+                    Download Resume
+                </a>
             </div>
         </div>
     </header>
@@ -27,131 +914,446 @@
     <nav>
         <div class="container">
             <a href="#about">About</a>
+            <a href="#experience">Experience</a>
             <a href="#skills">Skills</a>
             <a href="#education">Education</a>
             <a href="#projects">Projects</a>
             <a href="#achievements">Achievements</a>
+            <a href="#contact">Contact</a>
         </div>
     </nav>
 
     <main class="container">
-        <section id="about">
+        <section id="about" class="fade-in">
             <h2>About Me</h2>
             <div class="about-section">
-                <p> Hello! I'm Ramesh Chandra Soren, a web developer with a fresh perspective on creating engaging and functional websites.</p>
-                <p> I am currently in my 3rd year of college. I developed a web application for early breast cancer detection by analyzing medical reports and tumor images. Users can upload images and parameters, and the machine learning model provides a cancer risk assessment. Incorporated image denoising feature for accurate analysis. Built with <b>ReactJS, TailwindCSS, Python, and ExpressJS</b>. Combines cutting-edge technologies for a user-friendly cancer detection solution.</p>
+                <p>Hello! I'm Ramesh Chandra Soren, a passionate web developer with a fresh perspective on creating engaging and functional digital experiences. Currently pursuing my B.Tech in Computer Science at IIEST Shibpur, I combine academic excellence with practical development skills.</p>
+                <p>I specialize in full-stack development and have a keen interest in machine learning applications. My recent project involved developing a web application for early breast cancer detection, combining <strong>ReactJS, TailwindCSS, Python, and ExpressJS</strong> to create a comprehensive healthcare solution with image processing capabilities.</p>
+                <p>When I'm not coding, you'll find me solving algorithmic challenges on competitive programming platforms, where I've achieved notable rankings across multiple platforms.</p>
             </div>
         </section>
 
-        <section id="skills">
-            <h2>Skills</h2>
+        <section id="experience" class="fade-in">
+            <h2>Professional Experience</h2>
+            <div class="experience-timeline">
+                <div class="experience-item">
+                    <div class="experience-content">
+                        <div class="experience-header">
+                            <div class="experience-title">Technical Intern</div>
+                            <div class="experience-company">Spacey Science</div>
+                            <div class="experience-duration">Jun 2025 - Present • 2 months</div>
+                            <div class="experience-location">London Area, United Kingdom • Remote</div>
+                        </div>
+                        <div class="experience-description">
+                            Building their product from ground up. Working with the Spacey Science team to build an engaging, interactive space education platform for children. Gaining hands-on experience in a fast-paced, creative environment focused on real-world impact.
+                        </div>
+                        <div class="experience-skills">
+                            <span class="skill-tag">React.js</span>
+                            <span class="skill-tag">Firebase</span>
+                            <span class="skill-tag">JavaScript</span>
+                        </div>
+                    </div>
+                    <div class="experience-dot"></div>
+                </div>
+
+                <div class="experience-item">
+                    <div class="experience-content">
+                        <div class="experience-header">
+                            <div class="experience-title">Research And Development Intern</div>
+                            <div class="experience-company">Indian Institute of Engineering Science and Technology (IIEST), Shibpur</div>
+                            <div class="experience-duration">May 2025 - Jul 2025 • 3 months</div>
+                            <div class="experience-location">Shibpur • On-site</div>
+                        </div>
+                        <div class="experience-description">
+                            Under the mentorship of Prof. Surajeet Ghosh, working on advanced research projects involving web technologies and database management systems.
+                        </div>
+                        <div class="experience-skills">
+                            <span class="skill-tag">PHP</span>
+                            <span class="skill-tag">MySQL</span>
+                            <span class="skill-tag">Research</span>
+                        </div>
+                    </div>
+                    <div class="experience-dot"></div>
+                </div>
+
+                <div class="experience-item">
+                    <div class="experience-content">
+                        <div class="experience-header">
+                            <div class="experience-title">Bootcamp Intern</div>
+                            <div class="experience-company">GoQuant</div>
+                            <div class="experience-duration">Jun 2025 - Jun 2025 • 1 month</div>
+                            <div class="experience-location">Miami, Florida, United States • Remote</div>
+                        </div>
+                        <div class="experience-description">
+                            Building and integrating REST/WebSocket APIs. Developing OEMS (Order Execution Management System) components for high-frequency trading applications.
+                        </div>
+                        <div class="experience-skills">
+                            <span class="skill-tag">REST APIs</span>
+                            <span class="skill-tag">WebSocket</span>
+                            <span class="skill-tag">Trading Systems</span>
+                        </div>
+                    </div>
+                    <div class="experience-dot"></div>
+                </div>
+
+                <div class="experience-item">
+                    <div class="experience-content">
+                        <div class="experience-header">
+                            <div class="experience-title">Research And Development Intern</div>
+                            <div class="experience-company">Indian Institute of Engineering Science and Technology (IIEST), Shibpur</div>
+                            <div class="experience-duration">Sep 2024 - Jan 2025 • 5 months</div>
+                            <div class="experience-location">Shibpur • Hybrid</div>
+                        </div>
+                        <div class="experience-description">
+                            Focused on Software Development Life Cycle (SDLC) methodologies and best practices. Gained comprehensive understanding of project management and development workflows.
+                        </div>
+                        <div class="experience-skills">
+                            <span class="skill-tag">SDLC</span>
+                            <span class="skill-tag">Project Management</span>
+                            <span class="skill-tag">Software Engineering</span>
+                        </div>
+                    </div>
+                    <div class="experience-dot"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills" class="fade-in">
+            <h2>Technical Skills</h2>
             <div class="skills">
-                <span class="skill">C\C++</span>
-                <span class="skill">Python</span>
-                <span class="skill">HTML5</span>
-                <span class="skill">CSS3</span>
-                <span class="skill">JavaScript</span>
-                <span class="skill">Responsive Design</span>
-                <span class="skill">Git</span>
-                <span class="skill">React.js</span>
-                <span class="skill">Node.js</span>
+                <div class="skill">C/C++</div>
+                <div class="skill">Python</div>
+                <div class="skill">JavaScript</div>
+                <div class="skill">HTML5</div>
+                <div class="skill">CSS3</div>
+                <div class="skill">React.js</div>
+                <div class="skill">Node.js</div>
+                <div class="skill">Express.js</div>
+                <div class="skill">PHP</div>
+                <div class="skill">MySQL</div>
+                <div class="skill">Firebase</div>
+                <div class="skill">Git & GitHub</div>
+                <div class="skill">Machine Learning</div>
+                <div class="skill">Data Structures</div>
+                <div class="skill">Algorithms</div>
+                <div class="skill">REST APIs</div>
             </div>
         </section>
 
-        <section id="education">
+        <section id="education" class="fade-in">
             <h2>Education</h2>
             <div class="education-item">
-                <h3>Indian Institute of Engineering Science and Technology, Shibpur, 2022-2026 </h3>
-                <p><b>B Tech in Computer Science and Technology</b></p>
-                <p><b>Relevant coursework:</b> Data Structures and Algorithms, Data Science, OOPS, Computer Architecture and Organisation</p>
-                <p><b>CGPA:</b> 7.76 (out of 10 till 5th sem)</p>
+                <h3>Indian Institute of Engineering Science and Technology, Shibpur</h3>
+                <p><strong>B.Tech in Computer Science and Technology</strong> | 2022-2026</p>
+                <p><strong>CGPA:</strong> 7.76/10 (till 6th semester)</p>
+                <p><strong>Relevant Coursework:</strong> Data Structures and Algorithms, Data Science, Object-Oriented Programming, Computer Architecture and Organisation</p>
             </div>
             <div class="education-item">
-                <h3>Kendriya Vidyalaya, Asansol, 2012 - 2022</h3>
-                
-                <p><b>Senior secondary board (12th):</b> 85.4%</p>
-                <p><b>Secondary board (10th):</b> 90.6%</p>
-                
+                <h3>Kendriya Vidyalaya, Asansol</h3>
+                <p><strong>Senior Secondary (12th):</strong> 85.4%    | 2020-2022</p>
+                <p><strong>Secondary (10th):</strong> 90.6%           | 2012-2020</p>
             </div>
             <div class="education-item">
                 <h3>Open Source Web Development Cohort</h3>
-                <p><b>Instructor:</b> Harkirat Singh</p>
+                <p><strong>Instructor:</strong> Harkirat Singh</p>
                 <p>Intensive 6-month program focusing on full-stack web development and open source contribution</p>
             </div>
         </section>
 
-        <section id="projects">
-            <h2>My Projects</h2>
+        <section id="projects" class="fade-in">
+    <h2>Projects Portfolio</h2>
+
+    <!-- Future Major Project -->
+    <div class="project-category">
+        <h3 class="category-title"><i class="fas fa-rocket"></i> Upcoming Major Project</h3>
+        <div class="projects-grid">
+            <div class="project future-project">
+                <div class="project-header">
+                    <h3>4th Year Major Project</h3>
+                </div>
+                <div class="project-content">
+                    <p>Currently in development phase. This comprehensive project will showcase advanced full-stack development skills and cutting-edge technologies. Stay tuned for updates!</p>
+                    <div class="status-badge">
+                        <i class="fas fa-clock"></i>
+                        Coming Soon
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Major Personal Projects -->
+    <div class="project-category">
+        <h3 class="category-title"><i class="fas fa-star"></i> Major Personal Projects</h3>
+        <div class="projects-grid">
             <div class="project">
-                <h3>Gemini AI Chatbot</h3>
-                <p>
-                    - Built a conversational AI chatbot using <b>Gemini and Python Flask</b>.<br>
-                    - Integrated Gemini for advanced conversational abilities.<br>
-                    - Developed a scalable backend using Flask framework.<br>
-                    - Utilized natural language processing (NLP) for understanding user queries and context-aware responses.
-                </p>
-                <a href="https://github.com/rameshgitter/Gemini_bot" target="_blank" class="button">GitHub Repository</a>
+                <div class="project-header">
+                    <h3>Gemini AI Chatbot</h3>
+                </div>
+                <div class="project-content">
+                    <p>Built a conversational AI chatbot using <strong>Gemini API and Python Flask</strong>. Features include advanced conversational abilities, scalable backend architecture, and natural language processing for context-aware responses.</p>
+                    <div class="project-links">
+                        <a href="https://github.com/rameshgitter/Gemini_bot" target="_blank" class="button">
+                            <i class="fab fa-github"></i>
+                            GitHub
+                        </a>
+                    </div>
+                </div>
             </div>
+
             <div class="project">
-                <h3>4th Semester - Minor Project | Breast Cancer Detection</h3>
-                <p>
-                    - <b>Data Preprocessing:</b> Handled missing data, performed feature scaling, and encoded categorical variables to prepare the dataset for modeling.<br>
-                    - <b>Model Development:</b> Built a logistic regression model to classify tumors as benign or malignant based on various features such as tumor size, age, and other relevant factors. Implemented regularization techniques like Ridge or Lasso to avoid overfitting.<br>
-                    - <b>Model Evaluation:</b> Assessed the model's performance using metrics like accuracy(95.6%), precision(96%), recall(95%), and F1-score(95%) from the confusion matrix. Employed techniques like k-fold cross-validation to ensure robust evaluation and prevent data leakage.<br>
-                    - <b>Deployment:</b> Deployed the trained logistic regression model as a web application or API, allowing users to input new data and receive predictions on the likelihood of cancer.
-                </p>
-                <a href="https://github.com/rameshgitter/4th-Sem-Minor-Project" target="_blank" class="button">GitHub Repository</a>
+                <div class="project-header">
+                    <h3>Weather Forecast Application</h3>
+                </div>
+                <div class="project-content">
+                    <p>A comprehensive weather application built with <strong>Flask and modern web technologies</strong>. Provides real-time weather data, forecasts, and an intuitive user interface for weather tracking.</p>
+                    <div class="project-links">
+                        <a href="https://github.com/rameshgitter/Weather-Forecast" target="_blank" class="button">
+                            <i class="fab fa-github"></i>
+                            GitHub
+                        </a>
+                        <a href="https://v0-flask-weather-app.vercel.app/" target="_blank" class="button button-secondary">
+                            <i class="fas fa-external-link-alt"></i>
+                            Live Demo
+                        </a>
+                    </div>
+                </div>
             </div>
+
             <div class="project">
-                <h3>3rd Semester - Minor Project | Salt Pepper Noise Reduction</h3>
-                <p>
-                    - <b>Implemented two filter functions:</b> <b>Average Filter</b> and <b>Median Filter</b> in <b>Python</b> and <b>C</b> for reducing salt pepper noise from images.<br>
-                    - Utilized <b>OpenCV</b> for basic image operations.<br>
-                    - Developed a web application using <b>HTML, Tailwind CSS,</b> and <b>Django</b> for users to choose filters and kernel sizes to view the processed images.
-                </p>
-                <a href="https://github.com/rameshgitter/3rd-sem-Mini-Project" target="_blank" class="button">GitHub Repository</a>
+                <div class="project-header">
+                    <h3>Chess Application</h3>
+                </div>
+                <div class="project-content">
+                    <p>A fully functional chess game with interactive gameplay, move validation, and modern web interface. Built with <strong>JavaScript and advanced game logic</strong> for an engaging chess experience.</p>
+                    <div class="project-links">
+                        <a href="https://github.com/rameshgitter/Chess-Application" target="_blank" class="button">
+                            <i class="fab fa-github"></i>
+                            GitHub
+                        </a>
+                        <a href="https://v0-chess-website-drab.vercel.app/" target="_blank" class="button button-secondary">
+                            <i class="fas fa-external-link-alt"></i>
+                            Live Demo
+                        </a>
+                    </div>
+                </div>
             </div>
-        </section>
-                <section id="achievements">
-            <h2>Achievements</h2>
-            <div class="achievement-item">
-                <h3>Pupil on Codeforces</h3>
-                <p>Max Rating: <span class="highlight"><b>1383</b></span></p>
+        </div>
+    </div>
+
+    <!-- Minor Personal Projects -->
+    <div class="project-category">
+        <h3 class="category-title"><i class="fas fa-code"></i> Minor Personal Projects</h3>
+        <div class="projects-grid minor-projects">
+            <div class="project project-minor">
+                <div class="project-header">
+                    <h3>Hostel Watcher</h3>
+                </div>
+                <div class="project-content">
+                    <p>A monitoring application designed for hostel management and surveillance. Built with modern web technologies for efficient hostel operations.</p>
+                    <div class="project-links">
+                        <a href="https://github.com/rameshgitter/hostel_watcher" target="_blank" class="button button-small">
+                            <i class="fab fa-github"></i>
+                            GitHub
+                        </a>
+                    </div>
+                </div>
             </div>
-            <div class="achievement-item">
-                <h3>Knight on Leetcode</h3>
-                <p>Max Rating: <span class="highlight"><b>1880</b></span></p>
+
+            <div class="project project-minor">
+                <div class="project-header">
+                    <h3>LeetCode Parser</h3>
+                </div>
+                <div class="project-content">
+                    <p>A utility tool for parsing and analyzing LeetCode problems and solutions. Helps in organizing competitive programming practice efficiently.</p>
+                    <div class="project-links">
+                        <a href="https://github.com/rameshgitter/Leetcode-Parser" target="_blank" class="button button-small">
+                            <i class="fab fa-github"></i>
+                            GitHub
+                        </a>
+                    </div>
+                </div>
             </div>
-            <div class="achievement-item">
-                <h3>3⭐ on Codechef</h3>
-                <p>Max Rating: <span class="highlight"><b>1648</b></span></p>
+        </div>
+    </div>
+
+    <!-- College Projects -->
+    <div class="project-category">
+        <h3 class="category-title"><i class="fas fa-graduation-cap"></i> College Projects</h3>
+        <div class="projects-grid">
+            <div class="project">
+                <div class="project-header">
+                    <h3>Breast Cancer Detection System</h3>
+                    <div class="project-year">4th Semester</div>
+                </div>
+                <div class="project-content">
+                    <p>Developed a machine learning-powered web application for early breast cancer detection. Achieved <strong>95.6% accuracy</strong> using logistic regression with comprehensive data preprocessing, feature scaling, and cross-validation techniques.</p>
+                    <div class="project-links">
+                        <a href="https://github.com/rameshgitter/4th-Sem-Minor-Project" target="_blank" class="button">
+                            <i class="fab fa-github"></i>
+                            GitHub
+                        </a>
+                    </div>
+                </div>
             </div>
-            <div class="achievement-item">
-                <h3 class="achievement-title">Problem Solving</h3>
-                <p>Solved <span class="highlight"><b>400+</b></span> problems on various platforms, enhancing my <span class="highlight"><b>DSA</b></span> and <span class="highlight"><b>Problem Solving</b></span> skills.</p>
+
+            <div class="project">
+                <div class="project-header">
+                    <h3>Image Noise Reduction Tool</h3>
+                    <div class="project-year">3rd Semester</div>
+                </div>
+                <div class="project-content">
+                    <p>Implemented advanced filtering algorithms (Average and Median filters) in <strong>Python and C</strong> for salt-pepper noise reduction. Built a user-friendly web interface using <strong>Django and Tailwind CSS</strong>.</p>
+                    <div class="project-links">
+                        <a href="https://github.com/rameshgitter/3rd-sem-Mini-Project" target="_blank" class="button">
+                            <i class="fab fa-github"></i>
+                            GitHub
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+        <section id="achievements" class="fade-in">
+            <h2>Achievements & Recognition</h2>
+            <div class="achievements-grid">
+                <div class="achievement-item hackathon-achievement">
+                    <h3><i class="fas fa-trophy"></i> Hackathon Achievement</h3>
+                    <p><strong>Volatility Curve Prediction Competition</strong></p>
+                    <p>NK Securities Research • May 2025</p>
+                    <p>Secured rank <span class="highlight">335</span> out of <span class="highlight">2095</span> entrants</p>
+                    <p>Top <span class="highlight">16%</span> among 735 active participants</p>
+                </div>
+                <div class="achievement-item">
+                    <h3><i class="fas fa-trophy"></i> Codeforces</h3>
+                    <p>Pupil Rank</p>
+                    <p>Max Rating: <span class="highlight">1383</span></p>
+                </div>
+                <div class="achievement-item">
+                    <h3><i class="fas fa-code"></i> LeetCode</h3>
+                    <p>Knight Rank</p>
+                    <p>Max Rating: <span class="highlight">1880</span></p>
+                </div>
+                <div class="achievement-item">
+                    <h3><i class="fas fa-star"></i> CodeChef</h3>
+                    <p>4⭐ Rating</p>
+                    <p>Max Rating: <span class="highlight">1856</span></p>
+                </div>
+                <div class="achievement-item">
+                    <h3><i class="fas fa-brain"></i> Problem Solving</h3>
+                    <p>Solved <span class="highlight">800+</span> problems across various platforms</p>
+                    <p>Strong foundation in <span class="highlight">DSA</span></p>
+                </div>
             </div>
         </section>
     </main>
 
+    <section id="contact" class="contact-section fade-in">
+        <div class="container">
+            <div class="contact-content">
+                <div class="contact-intro">
+                    <h2>Get In Touch</h2>
+                    <p>Have a project in mind? Need help with coding? Or just want to connect? I'd love to hear from you! Whether you're a recruiter, fellow developer, or someone seeking guidance, feel free to reach out.</p>
+                </div>
+
+                <form class="contact-form" id="contactForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="subject">Subject</label>
+                            <select id="subject" name="subject" required>
+                                <option value="">Select a subject</option>
+                                <option value="job-opportunity">Job Opportunity</option>
+                                <option value="collaboration">Collaboration</option>
+                                <option value="help-request">Help Request</option>
+                                <option value="feedback">Feedback</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="company">Company/Organization (Optional)</label>
+                            <input type="text" id="company" name="company">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" placeholder="Tell me about your project, question, or how I can help you..." required></textarea>
+                    </div>
+
+                    <button type="submit" class="submit-button">
+                        <i class="fas fa-paper-plane"></i>
+                        Send Message
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
     <footer>
         <div class="container">
-            <p>&copy; 2024 Ramesh Chandra Soren. All rights reserved.</p>
+            <p>&copy; 2024 Ramesh Chandra Soren. All rights reserved. | Turning Dreams into Code</p>
         </div>
     </footer>
-    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
     <script>
-        var swiper = new Swiper('.project-carousel', {
-            slidesPerView: 1,
-            spaceBetween: 30,
-            loop: true,
-            pagination: {
-                el: '.swiper-pagination',
-                clickable: true,
-            },
-            navigation: {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
-            },
+        // Add fade-in animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all sections
+        document.querySelectorAll('section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Smooth scroll for navigation links
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetId = link.getAttribute('href');
+                const targetSection = document.querySelector(targetId);
+                targetSection.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+
+        // Contact form handling
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            // Get form data
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData);
+
+            // Show success message (you can integrate with a backend service here)
+            alert('Thank you for your message! I\'ll get back to you soon.');
+
+            // Reset form
+            this.reset();
+
+            // In a real implementation, you would send this data to your backend
+            console.log('Form data:', data);
         });
     </script>
 </body>
