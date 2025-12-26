@@ -9,8 +9,16 @@
     <meta property="og:description" content="Full Stack Developer • Competitive Programmer • ML Enthusiast">
     <meta property="og:type" content="website">
     <title>Ramesh Chandra Soren - Web Developer Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- EmailJS for contact form (optional - uncomment after setting up EmailJS) -->
+    <!-- 
+    STEP 1: Uncomment the line below after you've set up EmailJS
+    See EMAILJS_SETUP_GUIDE.md for detailed instructions
+    -->
+    <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script> -->
     <style>
         * {
             margin: 0;
@@ -38,7 +46,7 @@
             --shadow-md: 0 4px 16px rgba(0,0,0,0.12);
             --shadow-lg: 0 8px 32px rgba(0,0,0,0.16);
             --shadow-xl: 0 16px 48px rgba(0,0,0,0.2);
-            --blur-glass: blur(12px);
+            --blur-glass: blur(8px);
         }
 
         body {
@@ -104,11 +112,18 @@
                 radial-gradient(circle at 80% 80%, rgba(255,255,255,0.15) 0%, transparent 50%),
                 radial-gradient(circle at 40% 20%, rgba(255,255,255,0.08) 0%, transparent 50%);
             animation: float 20s ease-in-out infinite;
+            will-change: transform;
         }
 
         @keyframes float {
             0%, 100% { transform: translateY(0) scale(1); }
             50% { transform: translateY(-20px) scale(1.05); }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .header-pattern {
+                animation: none;
+            }
         }
 
         .header-content {
@@ -125,6 +140,7 @@
             gap: 0.5rem;
             background: rgba(255,255,255,0.2);
             backdrop-filter: var(--blur-glass);
+            -webkit-backdrop-filter: var(--blur-glass);
             padding: 0.5rem 1.5rem;
             border-radius: 50px;
             font-size: 0.875rem;
@@ -142,11 +158,18 @@
         .hero-badge i {
             color: var(--success);
             animation: pulse 2s ease-in-out infinite;
+            will-change: transform;
         }
 
         @keyframes pulse {
             0%, 100% { transform: scale(1); }
             50% { transform: scale(1.1); }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .hero-badge i {
+                animation: none;
+            }
         }
 
         .header-content h1 {
@@ -187,13 +210,16 @@
         .contact-card {
             background: rgba(255,255,255,0.15);
             backdrop-filter: var(--blur-glass);
+            -webkit-backdrop-filter: var(--blur-glass);
             padding: 1.25rem;
             border-radius: 16px;
             border: 1px solid rgba(255,255,255,0.3);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), background 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             display: flex;
             align-items: center;
             gap: 1rem;
+            position: relative;
+            will-change: transform;
         }
 
         .contact-card:hover {
@@ -219,6 +245,24 @@
             text-decoration: none;
             font-weight: 500;
             word-break: break-word;
+            cursor: pointer;
+            display: flex;
+            flex: 1;
+            align-items: center;
+            position: relative;
+            z-index: 10;
+            transition: opacity 0.2s ease, transform 0.2s ease;
+            padding: 0.25rem 0;
+        }
+
+        .contact-card a:hover {
+            text-decoration: underline;
+            opacity: 0.9;
+            transform: translateX(4px);
+        }
+
+        .contact-card a:active {
+            opacity: 0.8;
         }
 
         .cta-buttons {
@@ -238,7 +282,7 @@
             border-radius: 50px;
             font-weight: 600;
             text-decoration: none;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1), background 0.3s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             border: 2px solid transparent;
             cursor: pointer;
             font-size: 1rem;
@@ -274,6 +318,16 @@
 
         :focus:not(:focus-visible) { outline: none; }
 
+        /* Ensure all links are clickable */
+        a {
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        a[href^="http"]:not([href*="mailto"]) {
+            position: relative;
+        }
+
         /* Navigation */
         nav {
             position: sticky;
@@ -281,6 +335,7 @@
             z-index: 1000;
             background: rgba(255,255,255,0.95);
             backdrop-filter: var(--blur-glass);
+            -webkit-backdrop-filter: var(--blur-glass);
             box-shadow: var(--shadow-sm);
             border-bottom: 1px solid rgba(0,0,0,0.05);
         }
@@ -312,12 +367,6 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 0.5rem;
-            align-items: center;
         }
 
         .nav-links a {
@@ -419,8 +468,9 @@
             padding: 2rem;
             box-shadow: var(--shadow-md);
             border: 1px solid rgba(0,0,0,0.05);
-            transition: all 0.3s ease;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
             position: relative;
+            will-change: transform;
         }
 
         .timeline-card:hover {
@@ -510,9 +560,10 @@
             text-align: center;
             box-shadow: var(--shadow-md);
             border: 1px solid rgba(0,0,0,0.05);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
             overflow: hidden;
+            will-change: transform;
         }
 
         .skill-card::before {
@@ -595,8 +646,9 @@
             border-radius: 24px;
             overflow: hidden;
             box-shadow: var(--shadow-md);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             border: 1px solid rgba(0,0,0,0.05);
+            will-change: transform;
         }
 
         .project-card:hover {
@@ -624,6 +676,7 @@
             right: 1rem;
             background: rgba(255,255,255,0.95);
             backdrop-filter: var(--blur-glass);
+            -webkit-backdrop-filter: var(--blur-glass);
             padding: 0.5rem 1rem;
             border-radius: 50px;
             font-size: 0.75rem;
@@ -684,9 +737,10 @@
             text-align: center;
             box-shadow: var(--shadow-md);
             border: 1px solid rgba(0,0,0,0.05);
-            transition: all 0.3s ease;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
             position: relative;
             overflow: hidden;
+            will-change: transform;
         }
 
         .achievement-card::before {
@@ -805,6 +859,7 @@
         .contact-form {
             background: rgba(255,255,255,0.05);
             backdrop-filter: var(--blur-glass);
+            -webkit-backdrop-filter: var(--blur-glass);
             padding: 3rem;
             border-radius: 32px;
             border: 1px solid rgba(255,255,255,0.1);
@@ -896,7 +951,8 @@
         .fade-in {
             opacity: 0;
             transform: translateY(30px);
-            transition: all 0.8s ease-out;
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+            will-change: opacity, transform;
         }
 
         .fade-in.visible {
@@ -917,12 +973,13 @@
                 right: 0;
                 background: rgba(255,255,255,0.98);
                 backdrop-filter: var(--blur-glass);
+                -webkit-backdrop-filter: var(--blur-glass);
                 flex-direction: column;
                 padding: 1rem;
                 box-shadow: var(--shadow-lg);
                 transform: translateY(-100%);
                 opacity: 0;
-                transition: all 0.3s ease;
+                transition: transform 0.3s ease, opacity 0.3s ease;
             }
 
             .nav-links.active {
@@ -1008,7 +1065,7 @@
                         <div class="contact-icon">
                             <i class="fas fa-envelope"></i>
                         </div>
-                        <a href="mailto:sorenramesh868@gmail.com">sorenramesh868@gmail.com</a>
+                        <a href="mailto:sorenramesh868@gmail.com" aria-label="Send email to sorenramesh868@gmail.com">sorenramesh868@gmail.com</a>
                     </div>
                     <div class="contact-card">
                         <div class="contact-icon">
@@ -1020,18 +1077,18 @@
                         <div class="contact-icon">
                             <i class="fab fa-linkedin"></i>
                         </div>
-                            <a href="https://www.linkedin.com/in/ramesh-chandra-soren" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile (opens in new tab)">LinkedIn</a>
+                        <a href="https://www.linkedin.com/in/ramesh-chandra-soren" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile (opens in new tab)">LinkedIn</a>
                     </div>
                     <div class="contact-card">
                         <div class="contact-icon">
                             <i class="fab fa-github"></i>
                         </div>
-                            <a href="https://github.com/rameshgitter" target="_blank" rel="noopener noreferrer" aria-label="GitHub profile (opens in new tab)">GitHub</a>
+                        <a href="https://github.com/rameshgitter" target="_blank" rel="noopener noreferrer" aria-label="GitHub profile (opens in new tab)">GitHub</a>
                     </div>
                 </div>
 
                 <div class="cta-buttons">
-                    <a href="https://drive.google.com/file/d/1RkXYo1D8CkODzeD8YHm0RX6zOoap_IWU/view?usp=sharing" target="_blank" class="btn btn-primary">
+                    <a href="https://drive.google.com/file/d/159HNMC_qSgdwdz2ct7aPClADKsvb3vaV/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
                             <i class="fas fa-download"></i>
                         Download Resume
                     </a>
@@ -1581,88 +1638,209 @@
     </footer>
 
     <script>
-        // Mobile Navigation Toggle
+        // Cache DOM elements for better performance
         const navToggle = document.getElementById('navToggle');
-        const navLinks = document.getElementById('navLinks');
+        const navLinksEl = document.getElementById('navLinks');
+        const fadeInElements = document.querySelectorAll('.fade-in');
+        const anchorLinks = document.querySelectorAll('a[href^="#"]');
+        const navLinksAll = document.querySelectorAll('.nav-links a');
 
-        navToggle.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-            const icon = navToggle.querySelector('i');
-            icon.classList.toggle('fa-bars');
-            icon.classList.toggle('fa-times');
-        });
-
-        // Close mobile menu when clicking on a link
-        document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', () => {
-                navLinks.classList.remove('active');
+        // Mobile Navigation Toggle
+        if (navToggle && navLinksEl) {
+            navToggle.addEventListener('click', () => {
+                navLinksEl.classList.toggle('active');
                 const icon = navToggle.querySelector('i');
-                icon.classList.add('fa-bars');
-                icon.classList.remove('fa-times');
+                if (icon) {
+                    icon.classList.toggle('fa-bars');
+                    icon.classList.toggle('fa-times');
+                }
             });
-        });
 
-        // Smooth Scroll
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            // Close mobile menu when clicking on a link
+            navLinksAll.forEach(link => {
+                link.addEventListener('click', () => {
+                    navLinksEl.classList.remove('active');
+                    const icon = navToggle.querySelector('i');
+                    if (icon) {
+                        icon.classList.add('fa-bars');
+                        icon.classList.remove('fa-times');
+                    }
+                });
+            });
+        }
+
+        // Smooth Scroll - only for internal anchor links
+        anchorLinks.forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
+                const targetId = this.getAttribute('href');
+                if (targetId) {
+                    const target = document.querySelector(targetId);
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
                 }
             });
         });
 
-        // Scroll Animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
+        // Scroll Animations - optimized with IntersectionObserver
+        if ('IntersectionObserver' in window && fadeInElements.length > 0) {
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        // Unobserve after animation to improve performance
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            fadeInElements.forEach(el => {
+                observer.observe(el);
+            });
+        } else {
+            // Fallback for browsers without IntersectionObserver
+            fadeInElements.forEach(el => {
+                el.classList.add('visible');
+            });
+        }
+
+        // Form Handling - Works immediately with mailto, can be upgraded to EmailJS
+        const contactForm = document.getElementById('contactForm');
+        if (contactForm) {
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const formData = new FormData(this);
+                const data = Object.fromEntries(formData);
+                const submitBtn = this.querySelector('button[type="submit"]');
+                const statusEl = document.getElementById('formStatus');
+
+                // Validate form
+                if (!data.name || !data.email || !data.subject || !data.message) {
+                    statusEl.style.display = 'block';
+                    statusEl.textContent = 'Please fill in all required fields.';
+                    statusEl.style.color = '#f59e0b';
+                    return;
+                }
+
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+                statusEl.style.display = 'block';
+                statusEl.textContent = 'Preparing your message...';
+                statusEl.style.color = 'var(--primary)';
+
+                // ============================================
+                // EMAILJS CONFIGURATION
+                // ============================================
+                // Follow these steps to enable direct email sending:
+                // 
+                // STEP 1: Sign up at https://www.emailjs.com/ (free account)
+                // STEP 2: Add Email Service (Gmail/Outlook/etc.) → Get Service ID
+                // STEP 3: Create Email Template → Get Template ID  
+                // STEP 4: Get Public Key from Account → API Keys
+                // STEP 5: Uncomment EmailJS script tag in <head> section
+                // STEP 6: Update the values below with your credentials
+                //
+                // See EMAILJS_SETUP_GUIDE.md for detailed step-by-step instructions
+                // ============================================
+                
+                const USE_EMAILJS = true; // ⬅️ Change to true after setup
+                const serviceID = 'service_otvunio';      // ⬅️ Paste your Service ID here (e.g., 'service_abc123')
+                const templateID = 'template_owck0kj';    // ⬅️ Paste your Template ID here (e.g., 'template_xyz789')
+                const publicKey = 'jLEi2GMD8uqpaMQcH';      // ⬅️ Paste your Public Key here (e.g., 'abcdefghijklmnop')
+
+                if (USE_EMAILJS && typeof emailjs !== 'undefined' && publicKey !== 'YOUR_PUBLIC_KEY') {
+                    // EmailJS implementation (requires EmailJS script to be loaded)
+                    if (typeof emailjs !== 'undefined') {
+                        emailjs.init(publicKey);
+                    }
+                    const emailParams = {
+                        from_name: data.name,
+                        from_email: data.email,
+                        subject: data.subject,
+                        company: data.company || 'Not provided',
+                        message: data.message,
+                        to_email: 'sorenramesh868@gmail.com'
+                    };
+
+                    emailjs.send(serviceID, templateID, emailParams)
+                        .then(function(response) {
+                            statusEl.textContent = 'Thank you! Your message has been sent successfully. I will get back to you shortly.';
+                            statusEl.style.color = 'var(--success)';
+                            contactForm.reset();
+                            submitBtn.disabled = false;
+                            submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Send Message';
+                            setTimeout(() => {
+                                const nameField = document.getElementById('name');
+                                if (nameField) nameField.focus();
+                            }, 500);
+                        }, function(error) {
+                            // Fallback to mailto on error
+                            openMailto(data);
+                            statusEl.textContent = 'Opening your email client...';
+                            statusEl.style.color = 'var(--primary)';
+                            submitBtn.disabled = false;
+                            submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Send Message';
+                            console.error('EmailJS error:', error);
+                        });
+                } else {
+                    // Default: Use mailto (works immediately, no setup required)
+                    openMailto(data);
+                    statusEl.textContent = 'Opening your email client with your message...';
+                    statusEl.style.color = 'var(--primary)';
+                    contactForm.reset();
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Send Message';
+                    
+                    setTimeout(() => {
+                        const nameField = document.getElementById('name');
+                        if (nameField) nameField.focus();
+                    }, 1000);
+                }
+
+                function openMailto(formData) {
+                    const subjectMap = {
+                        'job-opportunity': 'Job Opportunity',
+                        'collaboration': 'Collaboration',
+                        'help-request': 'Help Request',
+                        'feedback': 'Feedback',
+                        'other': 'Other'
+                    };
+                    
+                    const subjectText = subjectMap[formData.subject] || formData.subject;
+                    const subject = encodeURIComponent(`Portfolio Contact: ${subjectText}`);
+                    const body = encodeURIComponent(
+                        `Hello Ramesh,\n\n` +
+                        `Name: ${formData.name}\n` +
+                        `Email: ${formData.email}\n` +
+                        `Company: ${formData.company || 'Not provided'}\n` +
+                        `Subject: ${subjectText}\n\n` +
+                        `Message:\n${formData.message}\n\n` +
+                        `---\nThis message was sent from your portfolio contact form.`
+                    );
+                    
+                    window.location.href = `mailto:sorenramesh868@gmail.com?subject=${subject}&body=${body}`;
                 }
             });
-        }, observerOptions);
+        }
 
-        document.querySelectorAll('.fade-in').forEach(el => {
-            observer.observe(el);
-        });
-
-        // Form Handling
-        document.getElementById('contactForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const formData = new FormData(this);
-            const data = Object.fromEntries(formData);
-            const submitBtn = this.querySelector('button[type="submit"]');
-            const statusEl = document.getElementById('formStatus');
-
-            submitBtn.disabled = true;
-            statusEl.style.display = 'block';
-            statusEl.textContent = 'Sending message...';
-
-            // Simulate async submission (replace with real request in production)
-            setTimeout(() => {
-                statusEl.textContent = 'Thank you — message sent. I will get back to you shortly.';
-                this.reset();
-                submitBtn.disabled = false;
-                // move focus back to name field for accessibility
-                const nameField = document.getElementById('name');
-                if (nameField) nameField.focus();
-                console.log('Form data:', data);
-            }, 800);
-        });
-
-        // Add active nav link on scroll
-        window.addEventListener('scroll', () => {
+        // Add active nav link on scroll - throttled for performance
+        let scrollTimeout;
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('.nav-links a');
+        
+        function updateActiveNavLink() {
             let current = '';
-            const sections = document.querySelectorAll('section');
+            const scrollY = window.scrollY || window.pageYOffset;
             
             sections.forEach(section => {
                 const sectionTop = section.offsetTop;
@@ -1672,13 +1850,20 @@
                 }
             });
 
-            document.querySelectorAll('.nav-links a').forEach(link => {
+            navLinks.forEach(link => {
                 link.classList.remove('active');
                 if (link.getAttribute('href') === `#${current}`) {
                     link.classList.add('active');
                 }
             });
-        });
+        }
+
+        window.addEventListener('scroll', () => {
+            if (scrollTimeout) {
+                window.cancelAnimationFrame(scrollTimeout);
+            }
+            scrollTimeout = window.requestAnimationFrame(updateActiveNavLink);
+        }, { passive: true });
     </script>
     <script>
         // Footer year update
